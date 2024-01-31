@@ -165,11 +165,11 @@
           if (squares[i][j] !== color) {
             squares[i][j] = color;
 
-            // Determine bounce direction based on the angle
+            // Determine bounce direction based on the angle with slight randomness
             if (Math.abs(Math.cos(angle)) > Math.abs(Math.sin(angle))) {
-              updatedDx = -updatedDx;
+              updatedDx = -updatedDx * (1 + Math.random() * 0.02 - 0.01);
             } else {
-              updatedDy = -updatedDy;
+              updatedDy = -updatedDy * (1 + Math.random() * 0.02 - 0.01);
             }
           }
         }
@@ -255,10 +255,11 @@
       if (iteration % 1_000 === 0) console.log("interation", iteration);
 
       updateScoreElement();
-
-      requestAnimationFrame(draw);
     }
 
-    requestAnimationFrame(draw);
+    let fps = 60; // Desired frames per second
+    let interval = 1000 / fps;
+    // Use setInterval to run the draw loop
+    setInterval(draw, interval);
   </script>
 </html>
